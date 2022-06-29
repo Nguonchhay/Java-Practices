@@ -30,7 +30,7 @@ public class MainScreen extends JFrame {
 
         // Menu
         JMenu menuFile = new JMenu("File");
-        JMenu menuManage = new JMenu("Manage");
+        JMenu menuManage = new JMenu("Management");
         JMenu menuAbout = new JMenu("About");
         menuBar.add(menuFile);
         menuBar.add(menuManage);
@@ -44,6 +44,15 @@ public class MainScreen extends JFrame {
         });
         menuFile.add(itemSave);
         menuFile.add(itemQuit);
+
+        // Menu Items for Category
+        JMenuItem itemCategory = new JMenuItem("Categories");
+        itemCategory.addActionListener(e -> {
+            CategoryScreen screen  = new CategoryScreen();
+            screen.display();
+            super.dispose();
+        });
+        menuManage.add(itemCategory);
 
         super.setJMenuBar(menuBar);
     }
