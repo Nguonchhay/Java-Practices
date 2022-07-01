@@ -1,7 +1,6 @@
 package screens;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MainScreen extends JFrame {
 
@@ -53,6 +52,15 @@ public class MainScreen extends JFrame {
             super.dispose();
         });
         menuManage.add(itemCategory);
+
+        // Menu Items for User
+        JMenuItem itemUser = new JMenuItem("Users");
+        itemUser.addActionListener(e -> {
+            UsersScreen screen  = new UsersScreen();
+            screen.display();
+            super.dispose();
+        });
+        menuManage.add(itemUser);
 
         super.setJMenuBar(menuBar);
     }
