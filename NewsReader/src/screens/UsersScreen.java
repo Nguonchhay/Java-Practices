@@ -35,6 +35,7 @@ public class UsersScreen extends JFrame {
         DefaultTableModel tableModelUser = new DefaultTableModel(usersData, userColumns);
         JTable tableUser = new JTable(tableModelUser);
         tableUser.setDefaultEditor(Object.class, null);
+        tableUser.setRowHeight(30);
 
         tableUser.getColumn(" ").setCellRenderer(new UserTableRenderedAndEditor(tableUser));
         tableUser.getColumn(" ").setCellEditor(new UserTableRenderedAndEditor(tableUser));
@@ -49,26 +50,38 @@ public class UsersScreen extends JFrame {
 
     class UserTableRenderedAndEditor implements TableCellRenderer, TableCellEditor {
 
-        private JButton btnDelete;
+        private JPanel pAction;
+        private JButton btnDelete, btnEdit;
         private int row;
 
         public UserTableRenderedAndEditor(JTable table) {
+            DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+
+            btnEdit = new JButton("Edit");
+            btnEdit.addActionListener(e -> {
+                String id = tableModel.getValueAt(row, 0).toString();
+                System.out.println("Selected id: " + id);
+            });
+
             btnDelete = new JButton("Delete");
             btnDelete.addActionListener(e -> {
-                DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
                 tableModel.removeRow(row);
             });
+
+            pAction = new JPanel(new FlowLayout());
+            pAction.add(btnEdit);
+            pAction.add(btnDelete);
         }
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            return btnDelete;
+            return pAction;
         }
 
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             this.row = row;
-            return btnDelete;
+            return pAction;
         }
 
         @Override
