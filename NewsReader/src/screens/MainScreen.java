@@ -1,5 +1,8 @@
 package screens;
 
+import layoutmanagers.FlowLayoutScreen;
+import layoutmanagers.GroupLayoutScreen;
+
 import javax.swing.*;
 
 public class MainScreen extends JFrame {
@@ -31,9 +34,11 @@ public class MainScreen extends JFrame {
         JMenu menuFile = new JMenu("File");
         JMenu menuManage = new JMenu("Management");
         JMenu menuAbout = new JMenu("About");
+        JMenu menuLayouts = new JMenu("Layout Manager");
         menuBar.add(menuFile);
         menuBar.add(menuManage);
         menuBar.add(menuAbout);
+        menuBar.add(menuLayouts);
 
         // Menu Items
         JMenuItem itemSave = new JMenuItem("Save Filter");
@@ -61,6 +66,21 @@ public class MainScreen extends JFrame {
             super.dispose();
         });
         menuManage.add(itemUser);
+
+        // Menu items for Layout Manager
+        JMenuItem itemFlowLayout = new JMenuItem("FlowLayout");
+        itemFlowLayout.addActionListener(e -> {
+            FlowLayoutScreen screen = new FlowLayoutScreen();
+            screen.setVisible(true);
+        });
+        menuLayouts.add(itemFlowLayout);
+
+        JMenuItem itemGroupLayout = new JMenuItem("GroupLayout");
+        itemGroupLayout.addActionListener(e -> {
+            GroupLayoutScreen screen = new GroupLayoutScreen();
+            screen.setVisible(true);
+        });
+        menuLayouts.add(itemGroupLayout);
 
         super.setJMenuBar(menuBar);
     }
