@@ -28,20 +28,20 @@ public class FileService {
     }
 
     public static String fileReader(String filenameAndPath) {
-        ArrayList<Character> result = new ArrayList<>();
+        StringBuilder result = new StringBuilder();
         try {
             FileReader reader = new FileReader(filenameAndPath);
             int character;
 
             while ((character = reader.read()) != -1) {
-                result.add((char) character);
+                result.append((char) character);
             }
             reader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Arrays.toString(result.toArray());
+        return result.toString();
     }
 
     public static String fileInputStream(String filenameAndPath) {
