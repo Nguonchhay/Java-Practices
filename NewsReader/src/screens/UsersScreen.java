@@ -10,6 +10,9 @@ import java.util.EventObject;
 
 public class UsersScreen extends JFrame {
 
+    JTable tableUser;
+    DefaultTableModel tableModelUser;
+
     public UsersScreen() {
         super("Users");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,14 +29,22 @@ public class UsersScreen extends JFrame {
         pContent.setLayout(boxLayout);
 
         pContent.add(new JLabel("Users"));
+        JButton btnAdd = new JButton("+ New");
+        btnAdd.addActionListener(e -> {
+            tableModelUser.addRow(new Object[] {
+                "1000", "New Name", "newname@gmail.com", "Male", " "
+            });
+        });
+        pContent.add(btnAdd);
+
         String[] userColumns = {"ID", "FullName", "Email", "Gender", " "};
         String[][] usersData = {
             {"1", "Hong Heng", "hongheng@gmail.com", "Male", " "},
             {"2", "Sok San", "soksan@gmail.com", "Male", " "},
             {"3", "Mey Long", "meylong@gmail.com", "Female", " "}
         };
-        DefaultTableModel tableModelUser = new DefaultTableModel(usersData, userColumns);
-        JTable tableUser = new JTable(tableModelUser);
+        tableModelUser = new DefaultTableModel(usersData, userColumns);
+        tableUser = new JTable(tableModelUser);
         tableUser.setDefaultEditor(Object.class, null);
         tableUser.setRowHeight(30);
 

@@ -14,8 +14,8 @@ public class NewsReader {
         catch (Exception e) {
             System.out.println("Look and Feel not set");
         }
-        //MainScreen mainScreen = new MainScreen("News Reader");
-        //mainScreen.display();
+        MainScreen mainScreen = new MainScreen("News Reader");
+        mainScreen.display();
 //        LoginScreen loginScreen = new LoginScreen();
 //        loginScreen.display();
 
