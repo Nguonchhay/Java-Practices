@@ -1,5 +1,6 @@
 package screens;
 
+import animations.ThreadScreen;
 import layoutmanagers.FlowLayoutScreen;
 import layoutmanagers.GroupLayoutScreen;
 
@@ -81,6 +82,13 @@ public class MainScreen extends JFrame {
             screen.setVisible(true);
         });
         menuLayouts.add(itemGroupLayout);
+
+        JMenuItem itemThreadTimer = new JMenuItem("Thread Timer");
+        itemThreadTimer.addActionListener(e -> {
+            ThreadScreen screen = new ThreadScreen();
+            screen.setVisible(true);
+        });
+        menuLayouts.add(itemThreadTimer);
 
         super.setJMenuBar(menuBar);
     }
