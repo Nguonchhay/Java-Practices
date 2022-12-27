@@ -19,7 +19,7 @@ public class NewsReader {
 //        LoginScreen loginScreen = new LoginScreen();
 //        loginScreen.display();
 
-        fileIO();
+//        fileIO();
     }
 
     public static void fileIO() {

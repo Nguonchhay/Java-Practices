@@ -60,6 +60,15 @@ public class MainScreen extends JFrame {
         menuManage.add(itemCategory);
 
         // Menu Items for User
+        JMenuItem itemRegister = new JMenuItem("Register");
+        itemRegister.addActionListener(e -> {
+            RegisterScreen screen  = new RegisterScreen();
+            screen.display();
+            super.dispose();
+        });
+        menuManage.add(itemRegister);
+
+        // Menu Items for User
         JMenuItem itemUser = new JMenuItem("Users");
         itemUser.addActionListener(e -> {
             UsersScreen screen  = new UsersScreen();
