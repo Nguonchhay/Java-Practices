@@ -7,14 +7,18 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class RegisterScreen extends JFrame {
 
     private int chooserMode;
     private final int MODE_OPEN = 1;
     private final int MODE_SAVE = 2;
+
+    private String selectedFilePath = "";
 
     public RegisterScreen() {
         super("Register");
@@ -80,6 +84,7 @@ public class RegisterScreen extends JFrame {
             if (chooserMode == MODE_OPEN) {
                 if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
                     String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                    selectedFilePath = filePath;
                     ImageIcon icon = new ImageIcon(new ImageIcon(filePath).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
                     imgProfile.setIcon(icon);
                 }
@@ -120,7 +125,41 @@ public class RegisterScreen extends JFrame {
         pProfile.add(pFileChooser);
         pForm.add(pProfile);
 
+        JPanel pButton = new JPanel(new FlowLayout());
+        JButton btnSave = new JButton("Save");
+        btnSave.addActionListener(e -> {
+            Path src = Paths.get(selectedFilePath);
+            Path dest = Paths.get(System.getProperty("user.dir") + "/src/uploads/file.jpg");
+            try {
+                Files.copy(src, dest);
+//                copy(src.toFile(), dest.toFile());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        pButton.add(btnSave);
+
         add(pTitle);
         add(pForm);
+        add(pButton);
+    }
+
+    private static void copy(File src, File dest) throws IOException {
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(src);
+            os = new FileOutputStream(dest);
+            // buffer size 1K
+
+            byte[] buf = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = is.read(buf)) > 0) {
+                os.write(buf, 0, bytesRead);
+            }
+        } finally {
+            is.close();
+            os.close();
+        }
     }
 }
